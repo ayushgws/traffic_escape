@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     private static SceneLoader instance;
+   
 
     public static SceneLoader Instance()
     {
@@ -41,6 +42,16 @@ public class SceneLoader : MonoBehaviour
     public void RestartCurrentLevel()
     {
        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void NextLevel()
+    {
+        string levelName = SceneManager.GetActiveScene().name;
+        string levelCount = levelName.Substring(5);
+        int count = int.Parse(levelCount);
+        count++;
+        SceneManager.LoadScene("Level"+count);
+
+
     }
 
 }

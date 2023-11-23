@@ -28,7 +28,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private ObjectDirection direction;
     [SerializeField] private Direction ownDirection;
-     private Direction initialDirection;
+    
+    private Direction initialDirection;
 
     private Vector3 moveDirection = Vector3.forward;
 
@@ -38,9 +39,12 @@ public class Movement : MonoBehaviour
     private Vector3 initialposition;
     private Vector3 squarePosition;
     
+    
 
     void Start()
     {
+
+        LevelManager.Instance().AddSpaceShip();
         _rigidbody = GetComponent<Rigidbody>();
         initialposition = transform.position;
     }
@@ -131,6 +135,7 @@ public class Movement : MonoBehaviour
     }
     void StopMoving()
     {
+        LevelManager.Instance().CheckMove();
         b_move = false;
     }
 
@@ -259,6 +264,8 @@ public class Movement : MonoBehaviour
         }
         if (other.transform.tag == "FinishLine")
         {
+            LevelManager.Instance().CheckSpaceShipCount();
+            LevelManager.Instance().ScoreCount();
             Destroy(gameObject);
         }
 

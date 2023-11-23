@@ -31,12 +31,12 @@ public class Pause_Menu : MonoBehaviour
     
     public void Loadmenu()
     {
-
+        SceneLoader.Instance().OpenHomeScene();
     }
   
     public void Restart()
     {
-
+        SceneLoader.Instance().RestartCurrentLevel();
     }
    
     

@@ -10,7 +10,7 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] private GameObject gameplayPanel;
     [SerializeField] private GameObject pausePenel;
     [SerializeField] private GameObject gameOverPenal;
-
+    [SerializeField] private GameObject WiningPenal;
     public static GameplayUIManager Instance() {  return instance; }
 
     private void Awake()
@@ -31,6 +31,8 @@ public class GameplayUIManager : MonoBehaviour
     {
         gameplayPanel.SetActive(false);
         pausePenel.SetActive(false);
+        WiningPenal.SetActive(false);
+        gameOverPenal.SetActive(false);
     }
 
     public void OpenPause() 
@@ -54,4 +56,14 @@ public class GameplayUIManager : MonoBehaviour
        gameOverPenal.SetActive(true);
 
     }
+    public void GameWiningScreen()
+    {
+        ResetAllScreen();
+        WiningPenal.SetActive(true);
+    }
+    public void UpdateScoreCount(int scrcount) 
+    {
+        WiningPenal.GetComponent<GameWiningPanel>().UpdateScoreCount(scrcount);
+    }
+
 }

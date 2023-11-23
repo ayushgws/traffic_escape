@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuController : MonoBehaviour
@@ -22,32 +20,34 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         OpenHome();
-       
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    void OpenHome()
-    {
-        homePanel.SetActive(true);
-        levelPanel.SetActive(false);
-        settingsPanel.SetActive(false);
 
     }
-    void OpenLevel()
-    {
-        homePanel.SetActive(false);
-        levelPanel.SetActive(true);
-        settingsPanel.SetActive(false);
-    }
-    void OpenSettings()
+    public void ResetScreen()
     {
         homePanel.SetActive(false);
         levelPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+    }
+    public void OpenHome()
+    {
+        ResetScreen();
+        homePanel.SetActive(true);
+    }
+    public void OpenLevel()
+    {
+        ResetScreen();
+        levelPanel.SetActive(true);
+    }
+    public void OpenSettings()
+    {
+        ResetScreen();
         settingsPanel.SetActive(true);
     }
 }

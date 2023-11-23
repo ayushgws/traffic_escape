@@ -23,4 +23,5 @@ public class GameplayPanel : MonoBehaviour
     {
         textMoveCount.text = move.ToString();   
     }
+    
 }

@@ -13,17 +13,17 @@ public class Game_Over : MonoBehaviour
     void Start()
     {
         btnMenu.onClick.AddListener(Loadmenu);
-        btnRestart.onClick.AddListener(Restart);
+        btnRestart.onClick.AddListener(Restart); 
     }
 
 
     public void Loadmenu()
     {
-
+        SceneLoader.Instance().OpenHomeScene();
     }
 
     public void Restart()
     {
-
+        SceneLoader.Instance().RestartCurrentLevel();
     }
 }
