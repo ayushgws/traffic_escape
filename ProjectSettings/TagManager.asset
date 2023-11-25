@@ -7,6 +7,8 @@ TagManager:
   - Square
   - FinishLine
   - MovingObject
+  - VehiclePoint
+  - Vehicle
   layers:
   - Default
   - TransparentFX

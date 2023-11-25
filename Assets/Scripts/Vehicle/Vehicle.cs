@@ -1,35 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
-public enum ObjectDirection
-{
-    Straight,
-    Left,
-    Right
-
-}
-public enum Direction
-{
-    Up,
-    Down,
-    Left,
-    Right
-
-}
-public class Movement : MonoBehaviour
+public class Vehicle : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody _rigidbody;
-    [SerializeField]private Canvas _canvas;
+    [SerializeField] private Canvas _canvas;
 
-    
+
     [SerializeField] private float speed = 1f;
-    [SerializeField] private ObjectDirection direction;
-    [SerializeField] private Direction ownDirection;
-    
+    private ObjectDirection direction;
+    private Direction ownDirection;
+
     private Direction initialDirection;
 
     private Vector3 moveDirection = Vector3.forward;
@@ -39,8 +22,12 @@ public class Movement : MonoBehaviour
     private bool checkSquare = false;
     private Vector3 initialposition;
     private Vector3 squarePosition;
-    
-    
+
+    public void SetDirections(ObjectDirection direction,Direction ownDirection)
+    {
+        this.direction = direction;
+        this.ownDirection = ownDirection;
+    }
 
     void Start()
     {
@@ -48,32 +35,32 @@ public class Movement : MonoBehaviour
         LevelManager.Instance().AddSpaceShip();
         _rigidbody = GetComponent<Rigidbody>();
         initialposition = transform.position;
-        _canvas.worldCamera = Camera.main;
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveObject();
-       
+
     }
 
     public void MoveObject()
     {
-        if(b_move)
+        if (b_move)
         {
             transform.Translate(moveDirection * speed * Time.deltaTime);
 
-            if(checkSquare)
+            if (checkSquare)
             {
-               
+
                 if (ownDirection == Direction.Left || ownDirection == Direction.Right)
                 {
-                    
-                    if(Mathf.Abs(transform.position.x - squarePosition.x) < 0.05f)
+
+                    if (Mathf.Abs(transform.position.x - squarePosition.x) < 0.05f)
                     {
                         Turn();
-                        
+
                     }
                 }
 
@@ -82,7 +69,7 @@ public class Movement : MonoBehaviour
                     if (Mathf.Abs(transform.position.z - squarePosition.z) < 0.05f)
                     {
                         Turn();
-                        
+
                     }
                 }
 
@@ -98,41 +85,16 @@ public class Movement : MonoBehaviour
             }
 
 
-            //if (returnBack)
-            //{
-
-            //    if (initialDirection == Direction.Left || initialDirection == Direction.Right)
-            //    {
-
-            //        if (Mathf.Abs(transform.position.x - initialposition.x) < 0.05f)
-            //        {
-            //            StopMoving();
-            //            returnBack = false;
-            //            moveDirection = Vector3.forward;
-
-            //        }
-            //    }
-
-            //    else if (initialDirection == Direction.Up || initialDirection == Direction.Down)
-            //    {
-            //        if (Mathf.Abs(transform.position.z - initialposition.z) < 0.05f)
-            //        {
-            //            StopMoving();
-            //            returnBack = false;
-            //            moveDirection = Vector3.forward;
-
-            //        }
-            //    }
-            //}
+         
         }
 
-       
+
     }
 
-    private void StartMoving()
+    public void StartMoving()
     {
         LevelManager.Instance().Move();
-        
+
         b_move = true;
     }
     void StopMoving()
@@ -148,7 +110,7 @@ public class Movement : MonoBehaviour
 
     private void Turn()
     {
-        checkSquare = false;    
+        checkSquare = false;
         if (!returnBack)
         {
             switch (direction)
@@ -157,7 +119,7 @@ public class Movement : MonoBehaviour
 
                     break;
                 case ObjectDirection.Left:
-                   switch (ownDirection)
+                    switch (ownDirection)
                     {
                         case Direction.Right:
                             ownDirection = Direction.Up;
@@ -165,23 +127,23 @@ public class Movement : MonoBehaviour
                         case Direction.Left:
                             ownDirection = Direction.Down;
                             break;
-                            case Direction.Down: 
+                        case Direction.Down:
                             ownDirection = Direction.Right;
                             break;
-                        case Direction.Up: 
+                        case Direction.Up:
                             ownDirection = Direction.Left;
                             break;
                     }
 
-                 
-                   transform.Rotate(0, -90, 0);
+
+                    transform.Rotate(0, -90, 0);
                     break;
                 case ObjectDirection.Right:
-                    
-                    switch(ownDirection)
-                        {
+
+                    switch (ownDirection)
+                    {
                         case Direction.Right:
-                    
+
                             ownDirection = Direction.Down;
                             break;
                         case Direction.Left:
@@ -194,10 +156,10 @@ public class Movement : MonoBehaviour
                             ownDirection = Direction.Right;
                             break;
                     }
-                    
+
                     transform.Rotate(0, 90, 0);
                     break;
-               
+
 
             }
         }
@@ -245,11 +207,11 @@ public class Movement : MonoBehaviour
                             ownDirection = Direction.Left;
                             break;
                     }
-                   
+
 
                     transform.Rotate(0, -90, 0);
                     break;
-              
+
             }
         }
 
@@ -275,12 +237,10 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (b_move&& collision.gameObject.tag == "MovingObject")
+        if (b_move && collision.gameObject.tag == "Vehicle")
         {
             moveDirection = Vector3.back;
             returnBack = true;
         }
     }
-
 }
-
