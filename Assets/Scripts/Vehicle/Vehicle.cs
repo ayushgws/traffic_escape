@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private Rigidbody _rigidbody;
+
     [SerializeField] private Canvas _canvas;
 
 
@@ -13,28 +12,29 @@ public class Vehicle : MonoBehaviour
     private ObjectDirection direction;
     private Direction ownDirection;
 
-    private Direction initialDirection;
-
     private Vector3 moveDirection = Vector3.forward;
 
     private bool b_move;
     private bool returnBack = false;
     private bool checkSquare = false;
-    private Vector3 initialposition;
     private Vector3 squarePosition;
+    private GameObject square;
+    private bool turnTaken;
 
     public void SetDirections(ObjectDirection direction,Direction ownDirection)
     {
         this.direction = direction;
         this.ownDirection = ownDirection;
     }
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
 
     void Start()
     {
 
         LevelManager.Instance().AddSpaceShip();
-        _rigidbody = GetComponent<Rigidbody>();
-        initialposition = transform.position;
        
     }
 
@@ -53,11 +53,12 @@ public class Vehicle : MonoBehaviour
 
             if (checkSquare)
             {
-
+                Debug.Log("Checking");
+                Debug.Log(Mathf.Abs(transform.position.x - squarePosition.x));
                 if (ownDirection == Direction.Left || ownDirection == Direction.Right)
                 {
 
-                    if (Mathf.Abs(transform.position.x - squarePosition.x) < 0.05f)
+                    if (Mathf.Abs(transform.position.x - squarePosition.x) < 0.1f)
                     {
                         Turn();
 
@@ -66,35 +67,21 @@ public class Vehicle : MonoBehaviour
 
                 else if (ownDirection == Direction.Up || ownDirection == Direction.Down)
                 {
-                    if (Mathf.Abs(transform.position.z - squarePosition.z) < 0.05f)
+                    if (Mathf.Abs(transform.position.z - squarePosition.z) < 0.1f)
                     {
                         Turn();
 
                     }
                 }
 
-
-
             }
-
-            if (returnBack && Vector3.Distance(transform.position, initialposition) < 0.1f)
-            {
-                StopMoving();
-                returnBack = false;
-                moveDirection = Vector3.forward;
-            }
-
-
-         
         }
-
-
     }
 
     public void StartMoving()
     {
         LevelManager.Instance().Move();
-
+        _canvas.gameObject.SetActive(false);
         b_move = true;
     }
     void StopMoving()
@@ -160,58 +147,61 @@ public class Vehicle : MonoBehaviour
                     transform.Rotate(0, 90, 0);
                     break;
 
-
             }
+            turnTaken = true;
         }
         else// For Returning Back
         {
-            switch (direction)
-            {
-                case ObjectDirection.Straight:
+            
+                
+                switch (direction)
+                {
+                    case ObjectDirection.Straight:
 
-                    break;
-                case ObjectDirection.Left:
-                    switch (ownDirection)
-                    {
-                        case Direction.Right:
+                        break;
+                    case ObjectDirection.Left:
+                        switch (ownDirection)
+                        {
+                            case Direction.Right:
 
-                            ownDirection = Direction.Down;
-                            break;
-                        case Direction.Left:
-                            ownDirection = Direction.Up;
-                            break;
-                        case Direction.Down:
-                            ownDirection = Direction.Left;
-                            break;
-                        case Direction.Up:
-                            ownDirection = Direction.Right;
-                            break;
-                    }
+                                ownDirection = Direction.Down;
+                                break;
+                            case Direction.Left:
+                                ownDirection = Direction.Up;
+                                break;
+                            case Direction.Down:
+                                ownDirection = Direction.Left;
+                                break;
+                            case Direction.Up:
+                                ownDirection = Direction.Right;
+                                break;
+                        }
 
-                    transform.Rotate(0, 90, 0);
-                    break;
-                case ObjectDirection.Right:
-                    switch (ownDirection)
-                    {
-                        case Direction.Right:
+                        transform.Rotate(0, 90, 0);
+                        break;
+                    case ObjectDirection.Right:
+                        switch (ownDirection)
+                        {
+                            case Direction.Right:
 
-                            ownDirection = Direction.Up;
-                            break;
-                        case Direction.Left:
-                            ownDirection = Direction.Down;
-                            break;
-                        case Direction.Down:
-                            ownDirection = Direction.Right;
-                            break;
-                        case Direction.Up:
-                            ownDirection = Direction.Left;
-                            break;
-                    }
+                                ownDirection = Direction.Up;
+                                break;
+                            case Direction.Left:
+                                ownDirection = Direction.Down;
+                                break;
+                            case Direction.Down:
+                                ownDirection = Direction.Right;
+                                break;
+                            case Direction.Up:
+                                ownDirection = Direction.Left;
+                                break;
+                        }
 
 
-                    transform.Rotate(0, -90, 0);
-                    break;
+                        transform.Rotate(0, -90, 0);
+                        break;
 
+                
             }
         }
 
@@ -222,15 +212,36 @@ public class Vehicle : MonoBehaviour
     {
         if (other.transform.tag == "Square")
         {
-            checkSquare = true;
-            squarePosition = other.transform.position;
+            
+            
 
+            if (!turnTaken)
+            {
+                if ((returnBack && square == other.gameObject || !returnBack)){
+                    square = other.gameObject;
+                    Debug.Log("Square");
+                    checkSquare = true;
+                    squarePosition = other.transform.position;
+                }
+            }
         }
         if (other.transform.tag == "FinishLine")
         {
             LevelManager.Instance().CheckSpaceShipCount();
             LevelManager.Instance().ScoreCount();
             Destroy(gameObject);
+        }
+
+        if(other.transform.tag =="VehiclePoint")
+        {
+            if (other.GetComponent<VehiclePoint>().GetVehicle() == this)
+            {
+                _canvas.gameObject.SetActive(true);
+                turnTaken = false;
+                StopMoving();
+                returnBack = false;
+                moveDirection = Vector3.forward;
+            }
         }
 
     }
@@ -241,6 +252,7 @@ public class Vehicle : MonoBehaviour
         {
             moveDirection = Vector3.back;
             returnBack = true;
+            turnTaken = false;
         }
     }
 }

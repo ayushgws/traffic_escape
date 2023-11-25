@@ -75,7 +75,11 @@ PrefabInstance:
     - target: {fileID: 2809025918617699731, guid: db763955092435a4787258ea481c9c16, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 718633267, guid: 2876533e2136ed84c8c7ab76a5cfc920, type: 3}
+      objectReference: {fileID: 21300000, guid: dfa8a01eeece8304baad79c1b5d783a4, type: 3}
+    - target: {fileID: 2809025918617699731, guid: db763955092435a4787258ea481c9c16, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7882353
+      objectReference: {fileID: 0}
     - target: {fileID: 4694781958697610771, guid: db763955092435a4787258ea481c9c16, type: 3}
       propertyPath: direction
       value: 0
@@ -142,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7014381535293724026, guid: db763955092435a4787258ea481c9c16, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.31
+      value: 0.103
       objectReference: {fileID: 0}
     - target: {fileID: 7014381535293724026, guid: db763955092435a4787258ea481c9c16, type: 3}
       propertyPath: m_LocalRotation.w
@@ -162,7 +166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7014381535293724026, guid: db763955092435a4787258ea481c9c16, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.1
+      value: 0.021
       objectReference: {fileID: 0}
     - target: {fileID: 7014381535293724026, guid: db763955092435a4787258ea481c9c16, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -215,11 +219,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7064678698491398669, guid: 42bc8c314e6102e499c4848dec31a5ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7064678698491398669, guid: 42bc8c314e6102e499c4848dec31a5ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.33
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7064678698491398669, guid: 42bc8c314e6102e499c4848dec31a5ec, type: 3}
       propertyPath: m_LocalRotation.w

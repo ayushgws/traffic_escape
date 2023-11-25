@@ -130,7 +130,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483803573806249902}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -254,8 +254,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2, y: 1.2, z: 1.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2, y: 1.2, z: 0.1}
+  m_Center: {x: 0, y: 0, z: -0.53}
 --- !u!114 &4694781958697610771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,10 +269,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 3694947219703236707}
-  speed: 1
+  speed: 15
   direction: 1
   ownDirection: 0
   vehicle: {fileID: 2903309108971545789}
+  directionImage: {fileID: 2809025918617699731}
+  spriteStraight: {fileID: 21300000, guid: dfa8a01eeece8304baad79c1b5d783a4, type: 3}
+  spriteLeft: {fileID: 21300000, guid: 3a08f5db17ada3142826cfd09e4c5e2e, type: 3}
+  spriteRight: {fileID: 21300000, guid: ae4f14513a5e5474ab38f428191c3c5e, type: 3}
 --- !u!1 &4758174472000137416
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,16 +404,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4881316803194751313}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.35000005}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.3500002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7014381535293724026}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.000000014901161}
+  m_AnchoredPosition: {x: 0, y: -0.000000029802322}
   m_SizeDelta: {x: 0.9056, y: 0.8172667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2589457180378945467
@@ -433,14 +437,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4117647}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3fec7fe51ca67f44e91b7c7a882b2151, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dfa8a01eeece8304baad79c1b5d783a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
