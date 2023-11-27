@@ -6,7 +6,7 @@ public class Vehicle : MonoBehaviour
 {
 
     [SerializeField] private Canvas _canvas;
-
+    [SerializeField] private Vehicle_AudioSound _audioSound;
 
     [SerializeField] private float speed = 1f;
     private ObjectDirection direction;
@@ -50,7 +50,7 @@ public class Vehicle : MonoBehaviour
         if (b_move)
         {
             transform.Translate(moveDirection * speed * Time.deltaTime);
-
+          
             if (checkSquare)
             {
                 Debug.Log("Checking");
@@ -80,6 +80,7 @@ public class Vehicle : MonoBehaviour
 
     public void StartMoving()
     {
+        _audioSound.MoveSound();
         LevelManager.Instance().Move();
         _canvas.gameObject.SetActive(false);
         b_move = true;
@@ -247,10 +248,12 @@ public class Vehicle : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
+    { 
         if (b_move && collision.gameObject.tag == "Vehicle")
         {
+            _audioSound.CollisionSound();
             moveDirection = Vector3.back;
+           // _audioSound.ReturnSound();
             returnBack = true;
             turnTaken = false;
         }
