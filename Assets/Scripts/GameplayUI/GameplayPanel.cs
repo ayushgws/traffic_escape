@@ -11,6 +11,7 @@ public class GameplayPanel : MonoBehaviour
 
     public void Start()
     {
+        AudioManager.Instance().BackgroundSound();
         btnPause.onClick.AddListener(PauseGame);
 
     }  

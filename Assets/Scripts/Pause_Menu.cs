@@ -18,6 +18,8 @@ public class Pause_Menu : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance().StopMusic();
+        AudioManager.Instance().PauseSound();  
         btnMenu.onClick.AddListener(Loadmenu);
         btnResume.onClick.AddListener(Resume);
         btnRestart.onClick.AddListener(Restart);
@@ -31,11 +33,13 @@ public class Pause_Menu : MonoBehaviour
     
     public void Loadmenu()
     {
+        Time.timeScale = 1.0f;
         SceneLoader.Instance().OpenHomeScene();
     }
   
     public void Restart()
     {
+        Time.timeScale = 1.0f;
         SceneLoader.Instance().RestartCurrentLevel();
     }
    

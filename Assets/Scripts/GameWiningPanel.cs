@@ -11,8 +11,11 @@ public class GameWiningPanel : MonoBehaviour
     [SerializeField] private Button btnMenu;
     [SerializeField] private Button btnNextLevel;
     [SerializeField]TextMeshProUGUI textScoreCount;
+    [SerializeField] TextMeshProUGUI textScoreCount2;
+
     void Start()
     {
+        AudioManager.Instance().StopMusic();
         btnRestart.onClick.AddListener(Restart);
         btnMenu.onClick.AddListener(MainMenu);
         btnNextLevel.onClick.AddListener(NextLevel);
@@ -25,7 +28,7 @@ public class GameWiningPanel : MonoBehaviour
     }
     public void Restart()
     {
-        SceneLoader.Instance().RestartCurrentLevel();
+        SceneLoader .Instance().RestartCurrentLevel();
     }
     public void NextLevel()
     {
@@ -38,5 +41,6 @@ public class GameWiningPanel : MonoBehaviour
     public void UpdateScoreCount(int Score)
     {
         textScoreCount.text = Score.ToString();
+        textScoreCount2 .text = Score.ToString();
     }
 }

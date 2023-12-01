@@ -27,10 +27,7 @@ public class VehiclePoint : MonoBehaviour
 
     public Vehicle GetVehicle() { return vehicle; }
 
-    private void OnMouseDown()
-    {
-        vehicle.StartMoving();
-    }
+  
 
     public void SetArrow()
     {

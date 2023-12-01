@@ -10,8 +10,10 @@ public class Game_Over : MonoBehaviour
 
 
 
+
     void Start()
     {
+        AudioManager.Instance().StopMusic();
         btnMenu.onClick.AddListener(Loadmenu);
         btnRestart.onClick.AddListener(Restart); 
     }

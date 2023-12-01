@@ -20,7 +20,7 @@ public class Vehicle : MonoBehaviour
     private Vector3 squarePosition;
     private GameObject square;
     private bool turnTaken;
-
+    private bool destroyed;
     public void SetDirections(ObjectDirection direction,Direction ownDirection)
     {
         this.direction = direction;
@@ -53,8 +53,8 @@ public class Vehicle : MonoBehaviour
           
             if (checkSquare)
             {
-                Debug.Log("Checking");
-                Debug.Log(Mathf.Abs(transform.position.x - squarePosition.x));
+            
+              
                 if (ownDirection == Direction.Left || ownDirection == Direction.Right)
                 {
 
@@ -80,8 +80,9 @@ public class Vehicle : MonoBehaviour
 
     public void StartMoving()
     {
-        _audioSound.MoveSound();
+        //_audioSound.MoveSound();
         LevelManager.Instance().Move();
+        
         _canvas.gameObject.SetActive(false);
         b_move = true;
     }
@@ -93,7 +94,8 @@ public class Vehicle : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartMoving();
+        if (!LevelManager.Instance().isMoving() && !LevelManager.Instance().IsPaused())
+            StartMoving();
     }
 
     private void Turn()
@@ -213,24 +215,26 @@ public class Vehicle : MonoBehaviour
     {
         if (other.transform.tag == "Square")
         {
-            
-            
-
-            if (!turnTaken)
+             if (!turnTaken)
             {
                 if ((returnBack && square == other.gameObject || !returnBack)){
                     square = other.gameObject;
-                    Debug.Log("Square");
-                    checkSquare = true;
+                  checkSquare = true;
                     squarePosition = other.transform.position;
                 }
             }
         }
         if (other.transform.tag == "FinishLine")
         {
-            LevelManager.Instance().CheckSpaceShipCount();
-            LevelManager.Instance().ScoreCount();
-            Destroy(gameObject);
+            if (!destroyed)
+            {
+                LevelManager.Instance().CheckSpaceShipCount();
+                LevelManager.Instance().ScoreCount();
+                LevelManager.Instance().StopMoving();
+                LevelManager.Instance().CheckMove();
+                destroyed = true;
+                Destroy(gameObject);
+            }
         }
 
         if(other.transform.tag =="VehiclePoint")
@@ -240,6 +244,8 @@ public class Vehicle : MonoBehaviour
                 _canvas.gameObject.SetActive(true);
                 turnTaken = false;
                 StopMoving();
+                LevelManager.Instance().StopMoving();
+                LevelManager.Instance().CheckMove();
                 returnBack = false;
                 moveDirection = Vector3.forward;
             }

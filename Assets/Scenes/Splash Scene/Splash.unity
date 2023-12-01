@@ -338,7 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 337636668}
   - component: {fileID: 337636667}
-  - component: {fileID: 337636666}
+  - component: {fileID: 337636669}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -346,7 +346,48 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &337636666
+--- !u!114 &337636667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337636665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c17aaee10baf1e479495984a409ee62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background_audioSource: {fileID: 0}
+  sfx_AudioSource: {fileID: 337636669}
+  backgroundSound: {fileID: 8300000, guid: 8970da4471865544883d0e80b909ce09, type: 3}
+  gameoverSound: {fileID: 8300000, guid: 7ff37767dff4e4a43b4dfeb5a036dfbb, type: 3}
+  gamewinSound: {fileID: 8300000, guid: c6de9818818a20642abd4d7c7501c367, type: 3}
+  gamePlaySound: {fileID: 8300000, guid: 63dbb00f5165b7b4b947d4f26ab65169, type: 3}
+  gamePauseSound: {fileID: 8300000, guid: b434de7a7d223244a9972bb8ebf8a72a, type: 3}
+  buttonSound: {fileID: 8300000, guid: 82e77112dbbb21841bb05639d88734f4, type: 3}
+  gameoverSoundPlayed: 1
+  gamewinSoundPlayed: 1
+  gameplaySoundPlayed: 1
+  backgroundSoundPlayed: 0
+  gamepusedSouundPlayed: 0
+  buttonSoundPlayed: 0
+--- !u!4 &337636668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337636665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.85226, y: 1.8663082, z: 2.3084435}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &337636669
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -358,7 +399,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.241
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -442,48 +483,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &337636667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337636665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c17aaee10baf1e479495984a409ee62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  background_audioSource: {fileID: 337636666}
-  sfx_AudioSource: {fileID: 0}
-  sfn_AudioSource: {fileID: 0}
-  sfm_AudioSource: {fileID: 0}
-  backgroundSound: {fileID: 0}
-  collideSound: {fileID: 0}
-  gameoverSound: {fileID: 0}
-  gamewinSound: {fileID: 0}
-  Spritessound: {fileID: 0}
-  warningSound: {fileID: 0}
-  brickDestroyed: {fileID: 0}
-  gameoverSoundPlayed: 0
-  gamewinSoundPlayed: 0
-  Spritessound_sfn: 0
-  Brick_sfm: 0
---- !u!4 &337636668
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337636665}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.85226, y: 1.8663082, z: 2.3084435}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &388764643
 GameObject:
   m_ObjectHideFlags: 0
